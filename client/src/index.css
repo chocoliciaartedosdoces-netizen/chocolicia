@@ -256,8 +256,6 @@ button {
 .site-footer-nav a, .site-footer-contact a { width: fit-content; color: rgb(255 249 240 / 68%); font-size: .78rem; transition: color 180ms ease, transform 180ms ease; }
 .site-footer-nav a:hover, .site-footer-contact a:hover { color: #f3cd73; transform: translateX(2px); }
 .site-footer-social .social-icon { height: 2.55rem; width: 2.55rem; }
-.footer-compact-cta { display: inline-flex; align-items: center; gap: .45rem; width: fit-content; margin-top: .55rem; border-bottom: 1px solid rgb(217 168 62 / 70%); padding-bottom: .35rem; color: #fff9f0; font-size: .76rem; font-weight: 600; transition: color 180ms ease, gap 180ms ease; }
-.footer-compact-cta:hover { color: #f3cd73; gap: .7rem; }
 .site-footer-bottom { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem 1.5rem; border-top: 1px solid rgb(255 249 240 / 12%); padding-top: 1.15rem; color: rgb(255 249 240 / 38%); font-size: .66rem; letter-spacing: .03em; text-align: center; }
 .footer-legal-links { display: inline-flex; gap: 1rem; }
 .footer-legal-links a { color: rgb(255 249 240 / 58%); transition: color 180ms ease; }

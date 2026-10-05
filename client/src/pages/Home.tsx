@@ -5,7 +5,7 @@ import BorderGlow from "../components/BorderGlow";
 import { CatalogGallery, CatalogManager } from "../components/CatalogManager";
 import Dock from "../components/Dock";
 import FlipCard from "../components/FlipCard";
-import { SITE, WA_ORCAMENTO, WA_SAUDACAO, waLink, waProduct } from "@/config/site";
+import { SITE, WA_ORCAMENTO, waLink, waProduct } from "@/config/site";
 import { trackEvent } from "@/lib/analytics";
 import { BakerySchema, PageMeta, WebSiteSchema } from "@/seo/JsonLd";
 import { getRouteMeta } from "@/seo/routeMeta";
@@ -25,7 +25,6 @@ const brigadeiros = "/images/brigadeiros.webp";
 
 const homeMeta = getRouteMeta("/");
 const whatsapp = WA_ORCAMENTO;
-const whatsappGreeting = WA_SAUDACAO;
 const productWhatsApp = waProduct;
 const instagram = SITE.instagram;
 const facebook = SITE.facebook;
@@ -585,15 +584,11 @@ export default function Home() {
             <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-[#FFF9F0]/70 md:mt-5">Conte sua ideia para nós. Será um prazer criar algo único para a sua celebração.</p>
             <a href="#orcamento" className="button-gold button-final mt-6 text-sm">Solicitar orçamento</a>
             <div className="mt-4"><a href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackAnalytics("whatsapp_click", { placement: "contact_catalog" })} className="text-sm text-[#FFF9F0]/70 underline decoration-[#D9A83E]/70 underline-offset-4 transition hover:text-[#FFF9F0]">Prefere ver nosso catálogo completo? Chame no WhatsApp</a></div>
-            <div className="mt-6 flex flex-col items-center gap-4 text-sm text-[#FFF9F0]/70 sm:flex-row sm:justify-center sm:gap-6">
-              <a href={`tel:+${SITE.whatsappNumber}`} onClick={() => trackEvent("phone_click", { placement: "home_contact" })} className="transition hover:text-[#FFF9F0]">{SITE.whatsappDisplay}</a>
-              <a href={`mailto:${officialEmail}`} className="transition hover:text-[#FFF9F0]">{officialEmail}</a>
-            </div>
           </div>
         </section>
       </main>
 
-      <footer className="site-footer border-t border-[#FFF9F0]/10 bg-[#3A241D] px-4 py-10 pb-24 text-[#FFF9F0]/70 md:px-6 md:py-12 md:pb-12 lg:px-8">
+      <footer className="site-footer border-t border-[#FFF9F0]/10 bg-[#3A241D] px-4 py-10 pb-28 text-[#FFF9F0]/70 md:px-6 md:py-12 md:pb-28 lg:px-8">
         <div className="site-footer-inner mx-auto max-w-7xl">
           <div className="site-footer-brand">
             <a href="#inicio" className="footer-brand-lockup" aria-label="Chocolícia — início"><img src={logo} alt="" /><span className="font-display text-3xl text-[#FFF9F0]">Chocolícia</span></a>
@@ -614,7 +609,6 @@ export default function Home() {
           <div className="site-footer-social">
             <p className="footer-kicker">Redes sociais</p>
             <SocialLinks className="mt-4" placement="footer_social_icons" />
-            <a href={whatsappGreeting} target="_blank" rel="noreferrer" aria-label="Abrir o WhatsApp com uma mensagem de saudação" onClick={() => trackAnalytics("whatsapp_click", { placement: "footer_cta" })} className="footer-compact-cta">Falar no WhatsApp <Icon name="arrow" className="h-3.5 w-3.5" /></a>
           </div>
         </div>
         <div className="site-footer-bottom mx-auto mt-8 max-w-7xl"><span>© 2026 Chocolícia</span><span>Feito à mão, com carinho.</span><span className="footer-legal-links"><a href="/politicas-e-termos#privacidade">Privacidade</a><a href="/politicas-e-termos#termos">Termos de Uso</a></span></div>
