@@ -4,20 +4,30 @@ import { type Server } from "http";
 import { nanoid } from "nanoid";
 import path from "path";
 import { fileURLToPath } from "url";
-import { createServer as createViteServer } from "vite";
-import viteConfig from "../../vite.config";
+import { createServer as createViteServer, type UserConfig } from "vite";
+import viteConfigFactory from "../../vite.config";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export async function setupVite(app: Express, server: Server) {
+  // vite.config.ts exporta uma factory function — devemos chamá-la com o env correto
+  const resolvedConfig: UserConfig =
+    typeof viteConfigFactory === "function"
+      ? (viteConfigFactory as (env: { isSsrBuild: boolean; command: string; mode: string }) => UserConfig)({
+          isSsrBuild: false,
+          command: "serve",
+          mode: "development",
+        })
+      : (viteConfigFactory as UserConfig);
+
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
     allowedHosts: true as true
   };
   const vite = await createViteServer({
-    ...viteConfig,
+    ...resolvedConfig,
     configFile: false,
     server: serverOptions as any,
     appType: "custom"

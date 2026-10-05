@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import PhotoCarousel from "../components/PhotoCarousel";
 import { CakeSlice, Facebook, House, Instagram, MessageCircle, Music2 } from "lucide-react";
 import BorderGlow from "../components/BorderGlow";
 import { CatalogGallery, CatalogManager } from "../components/CatalogManager";
@@ -464,6 +465,18 @@ export default function Home() {
             </div>
             <Carousel items={cakes} onOpen={setLightbox} />
             <div className="mt-6 text-center"><a href={productWhatsApp("um bolo personalizado")} target="_blank" rel="noreferrer" onClick={() => trackAnalytics("whatsapp_click", { placement: "cakes_catalog" })} className="text-cta">Encomendar um bolo personalizado <Icon name="arrow" /></a></div>
+          </div>
+        </section>
+
+        <div className="section-ornament" aria-hidden="true"><span /></div>
+        <section id="carrossel" data-reveal className="reveal scroll-mt-20 bg-[#FFF9F0] px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-8 text-center md:mb-10 lg:mb-12">
+              <p className="eyebrow mb-3">Nossos trabalhos</p>
+              <h2 className="section-title mx-auto">Feito à mão, em cada detalhe</h2>
+              <p className="mx-auto mt-3 max-w-md text-[#8A5A44]">Uma seleção de criações que saíram das nossas mãos direto para momentos especiais.</p>
+            </div>
+            <PhotoCarousel />
           </div>
         </section>
 
