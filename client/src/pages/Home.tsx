@@ -593,7 +593,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="site-footer border-t border-[#FFF9F0]/10 bg-[#3A241D] px-4 py-10 pb-24 text-[#FFF9F0]/70 md:px-6 md:py-12 md:pb-12 lg:px-8">
+      <footer className="site-footer border-t border-[#FFF9F0]/10 bg-[#3A241D] px-4 py-10 pb-28 text-[#FFF9F0]/70 md:px-6 md:py-12 md:pb-28 lg:px-8">
         <div className="site-footer-inner mx-auto max-w-7xl">
           <div className="site-footer-brand">
             <a href="#inicio" className="footer-brand-lockup" aria-label="Chocolícia — início"><img src={logo} alt="" /><span className="font-display text-3xl text-[#FFF9F0]">Chocolícia</span></a>
