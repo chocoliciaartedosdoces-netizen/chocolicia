@@ -30,10 +30,6 @@ export function trackEvent(name: string, params: EventParams = {}): void {
   if (typeof window === "undefined") return;
   if (typeof window.gtag === "function") {
     window.gtag("event", name, { ...params, page_location: window.location.href });
-  } else {
-    // Fallback: empurra direto para o dataLayer do GTM/GA4
-    window.dataLayer = window.dataLayer ?? [];
-    (window.dataLayer as unknown[]).push({ event: name, ...params });
   }
 }
 
