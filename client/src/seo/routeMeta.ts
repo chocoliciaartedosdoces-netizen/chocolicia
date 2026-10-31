@@ -108,8 +108,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     canonical: `${base}/politicas-e-termos`,
     ogTitle: "Políticas e Termos | Chocolícia",
     ogDescription: "Política de privacidade e termos de uso da Chocolícia.",
-    robots: "noindex,follow",
-    inSitemap: false,
+    inSitemap: true,
   },
   "/404": {
     path: "/404",

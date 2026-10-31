@@ -46,6 +46,21 @@ export default function Legal() {
             <p>O site pode utilizar cookies ou tecnologias semelhantes para funcionamento, preferências e análise de uso. Esta política pode ser atualizada quando houver mudança nos serviços ou na legislação. A data da última atualização será indicada abaixo.</p>
           </section>
 
+          <section id="cookies" className="legal-section legal-section-divider mt-8 pt-8 scroll-mt-8 md:mt-12 md:pt-12">
+            <div className="legal-section-heading"><ShieldCheck className="h-6 w-6 text-[#D9A83E]" /><div><p className="eyebrow">Escolhas transparentes</p><h2>Política de Cookies</h2></div></div>
+            <p>Este site usa armazenamento necessário para funcionar e, somente com sua escolha, tecnologias de análise e publicidade. Você pode alterar ou revogar sua escolha a qualquer momento em “Preferências de cookies”.</p>
+            <h3>Quais cookies e tecnologias podem ser usados</h3>
+            <div className="overflow-x-auto"><table className="w-full min-w-[42rem] text-left text-sm"><thead><tr><th className="p-2">Grupo/exemplo</th><th className="p-2">Provedor</th><th className="p-2">Finalidade</th><th className="p-2">Categoria</th><th className="p-2">Guarda</th></tr></thead><tbody>
+              <tr><td className="p-2">localStorage `chocolicia-consent-v3`</td><td className="p-2">Chocolícia</td><td className="p-2">Guardar sua escolha de consentimento</td><td className="p-2">Necessário</td><td className="p-2">Até remoção pelo visitante</td></tr>
+              <tr><td className="p-2">`_ga`, `_ga_*`</td><td className="p-2">Google Analytics 4</td><td className="p-2">Medição de visitas e navegação</td><td className="p-2">Análise</td><td className="p-2">[CONFIRMAR — referência usual do Google: até 2 anos]</td></tr>
+              <tr><td className="p-2">Google Tag Manager</td><td className="p-2">Google</td><td className="p-2">Carregar e administrar tags configuradas</td><td className="p-2">Necessário/técnico</td><td className="p-2">[CONFIRMAR no painel]</td></tr>
+              <tr><td className="p-2">Cookies de publicidade e conversão</td><td className="p-2">Google Ads</td><td className="p-2">Medição de campanhas e remarketing, se configurado</td><td className="p-2">Publicidade</td><td className="p-2">[CONFIRMAR no painel]</td></tr>
+            </tbody></table></div>
+            <h3>Base legal e compartilhamento</h3><p>Cookies de análise e publicidade dependem do consentimento. Os recursos necessários são usados para operar o site e registrar a escolha do visitante. Quando autorizados, dados podem ser processados pela Google, inclusive com transferência internacional, conforme as políticas e configurações desses serviços.</p>
+            <h3>Direitos do titular</h3><p>Você pode solicitar acesso, correção, eliminação, informação sobre o tratamento e revogação do consentimento, nos termos do art. 18 da LGPD. Para exercer seus direitos, escreva para <a href={`mailto:${email}`}>{email}</a>. Dados como CNPJ, endereço completo e encarregado: <strong>[PREENCHER]</strong>.</p>
+            <p className="legal-updated">Versão 1 · Última atualização: 31 de outubro de 2026.</p>
+          </section>
+
           <section id="termos" className="legal-section legal-section-divider mt-8 pt-8 scroll-mt-8 md:mt-12 md:pt-12">
             <div className="legal-section-heading"><FileText className="h-6 w-6 text-[#D9A83E]" /><div><p className="eyebrow">Uma relação clara</p><h2>Termos de Uso</h2></div></div>
             <p>Ao acessar este site, você concorda com estes Termos de Uso. Caso não concorde com alguma disposição, recomendamos não utilizar os canais digitais da Chocolícia.</p>
@@ -66,7 +81,7 @@ export default function Legal() {
         </div>
       </main>
 
-      <footer className="legal-footer px-4 py-10 md:px-6 md:py-12 lg:px-8"><span>© 2026 Chocolícia</span><a href="#privacidade">Privacidade</a><a href="#termos">Termos de Uso</a></footer>
+      <footer className="legal-footer px-4 py-10 md:px-6 md:py-12 lg:px-8"><span>© 2026 Chocolícia</span><a href="#privacidade">Privacidade</a><a href="#cookies">Cookies</a><a href="#termos">Termos de Uso</a><button type="button" onClick={() => window.dispatchEvent(new CustomEvent("chocolicia:open-cookie-preferences"))}>Preferências de cookies</button></footer>
     </div>
   );
 }

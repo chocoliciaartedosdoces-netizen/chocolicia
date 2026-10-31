@@ -92,6 +92,7 @@ export function generateLlmsTxt(): string {
 - [Áreas Atendidas](${SITE.url}/areas-atendidas) – Base em Niterói e cidades atendidas no estado do Rio de Janeiro.
 - [Sobre a Chocolícia](${SITE.url}/sobre) – História, diferenciais e forma de trabalho artesanal.
 - [Perguntas frequentes](${SITE.url}/faq) – Respostas objetivas sobre encomendas, festas e atendimento.
+- [Política de Privacidade e Cookies](${SITE.url}/politicas-e-termos#cookies) – Como a Chocolícia trata dados e consentimento.
 
 ## Versões em Markdown
 
