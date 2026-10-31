@@ -63,7 +63,8 @@ function injectMeta(template: string, meta: RouteMeta, body: string): string {
     .replace(/<link rel="canonical"[^>]*\/>/g, "")
     .replace(/<meta property="og:[^>]*\/>/g, "")
     .replace(/<meta name="twitter:[^>]*\/>/g, "")
-    .replace(/<meta name="description"[^>]*\/>/g, "");
+    .replace(/<meta name="description"[^>]*\/>/g, "")
+    .replace(/<link rel="alternate"[^>]*hreflang="pt-BR"[^>]*\/>/g, "");
 
   html = html.replace("<head>", `<head>${headInjection}`);
   html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
