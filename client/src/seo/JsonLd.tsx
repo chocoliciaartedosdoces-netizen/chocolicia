@@ -49,7 +49,8 @@ function buildBakerySchema() {
     logo: `${SITE.url}/images/logo.png`,
     address,
     areaServed,
-    sameAs,
+    sameAs: [SITE.instagram, SITE.facebook, SITE.tiktok].filter(Boolean),
+    hasMap: SITE.googleBusiness,
   };
 
   // Campos opcionais
@@ -65,6 +66,24 @@ function buildBakerySchema() {
   if (SITE.phoneLandline) schema["telephone"] = SITE.phoneLandline;
 
   return schema;
+}
+
+export function ProductSchema() {
+  const products = [
+    ["Bolos personalizados", "Bolos artesanais feitos sob encomenda para celebrações.", "/images/bolo-aniversario.webp"],
+    ["Doces artesanais", "Brigadeiros e doces finos produzidos artesanalmente.", "/images/brigadeiros.webp"],
+    ["Kit festa", "Composição de doces e itens personalizados para eventos.", "/images/mesa-personalizada.webp"],
+  ];
+  const schema = products.map(([name, description, image]) => ({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description,
+    image: `${SITE.url}${image}`,
+    brand: { "@type": "Brand", name: SITE.fullName },
+    // Prices are intentionally omitted until the owner publishes a price list.
+  }));
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
 export function BakerySchema() {

@@ -1,6 +1,6 @@
 import { ArrowLeft, FileText, ShieldCheck } from "lucide-react";
 
-const email = "chocoliciaartedosdoces@gmai.com";
+const email = "chocoliciaartedosdoces@gmail.com";
 
 export default function Legal() {
   return (

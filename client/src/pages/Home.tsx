@@ -7,7 +7,7 @@ import Dock from "../components/Dock";
 import FlipCard from "../components/FlipCard";
 import { SITE, WA_ORCAMENTO, WA_SAUDACAO, waLink, waProduct } from "@/config/site";
 import { trackEvent } from "@/lib/analytics";
-import { BakerySchema, PageMeta, WebSiteSchema } from "@/seo/JsonLd";
+import { BakerySchema, PageMeta, ProductSchema, WebSiteSchema } from "@/seo/JsonLd";
 import { getRouteMeta } from "@/seo/routeMeta";
 import { trpc } from "../lib/trpc";
 // @ts-expect-error React Bits ships this visual component as JavaScript.
@@ -242,7 +242,7 @@ function QuoteSection() {
     } catch {
       setSaveError(true);
     }
-    trackEvent("form_submit", { placement: "quote_form" });
+    trackEvent("generate_lead", { placement: "quote_form" });
     window.open(waLink(message), "_blank", "noopener,noreferrer");
     setSent(true);
   };
@@ -320,6 +320,7 @@ export default function Home() {
       <PageMeta meta={homeMeta} />
       <BakerySchema />
       <WebSiteSchema />
+      <ProductSchema />
 
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[#5A3428]/10 bg-[#FFF9F0]/95 backdrop-blur-md">
         <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-4 md:px-6 lg:h-20 lg:px-8">
@@ -609,7 +610,8 @@ export default function Home() {
             <p className="footer-kicker">Contato</p>
             <p>Niterói, Rio de Janeiro</p>
             <a href={`tel:+${SITE.whatsappNumber}`} onClick={() => trackEvent("phone_click", { placement: "home_footer" })}>{SITE.whatsappDisplay}</a>
-            <a href={`mailto:${officialEmail}`}>{officialEmail}</a>
+            <a href={`mailto:${officialEmail}`} onClick={() => trackEvent("email_click", { placement: "home_footer" })}>{officialEmail}</a>
+            <a href={googleBusiness} target="_blank" rel="noreferrer" onClick={() => trackEvent("directions_click", { placement: "home_footer" })}>Como chegar no Google Maps</a>
           </div>
           <div className="site-footer-social">
             <p className="footer-kicker">Redes sociais</p>

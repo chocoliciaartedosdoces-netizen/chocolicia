@@ -1,6 +1,10 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+import { trackEvent } from "./lib/analytics";
+import ConsentBanner from "./components/ConsentBanner";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import AreasAtendidas from "./pages/AreasAtendidas";
@@ -27,13 +31,23 @@ function Router() {
   );
 }
 
+function AnalyticsNavigation() {
+  const [location] = useLocation();
+  useEffect(() => {
+    trackEvent("page_view", { page_path: location, page_title: document.title });
+  }, [location]);
+  return null;
+}
+
 function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
+          <AnalyticsNavigation />
           <Router />
+          <ConsentBanner />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

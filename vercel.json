@@ -9,6 +9,14 @@
     }
   },
   "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "chocolicia.site" }],
+      "destination": "https://www.chocolicia.site/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/llms.txt",

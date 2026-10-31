@@ -224,7 +224,7 @@ export default function BuffetParaFestas() {
             <a href={`tel:+${SITE.whatsappNumber}`} onClick={() => trackEvent("phone_click", { placement: "buffet_footer" })} className="text-sm hover:text-[#FFF9F0] transition">
               {SITE.whatsappDisplay}
             </a>
-            <a href={`mailto:${SITE.email}`} className="block text-sm hover:text-[#FFF9F0] transition">{SITE.email}</a>
+            <a href={`mailto:${SITE.email}`} onClick={() => trackEvent("email_click", { placement: "buffet_footer" })} className="block text-sm hover:text-[#FFF9F0] transition">{SITE.email}</a>
           </div>
           <nav className="flex gap-4 text-sm flex-wrap">
             <a href="/" className="hover:text-[#FFF9F0] transition">Início</a>
