@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateConsent } from "@/lib/analytics";
 
 const CONSENT_KEY = "chocolicia-consent-v2";
 
 export default function ConsentBanner() {
-  const [visible, setVisible] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.localStorage.getItem(CONSENT_KEY) === null;
-  });
+  // Keep the server render and the first client render identical. The banner
+  // is evaluated only after hydration so localStorage cannot cause a mismatch.
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(window.localStorage.getItem(CONSENT_KEY) === null);
+  }, []);
 
   const choose = (granted: boolean) => {
     window.localStorage.setItem(CONSENT_KEY, granted ? "granted" : "denied");
