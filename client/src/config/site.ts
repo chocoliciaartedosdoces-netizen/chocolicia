@@ -12,6 +12,8 @@ export const SITE = {
   description:
     "Doces artesanais, bolos personalizados e buffet para festas e eventos em Niterói e Região Metropolitana do Rio de Janeiro.",
   url: "https://www.chocolicia.site",
+  organizationId: "https://www.chocolicia.site/#organization",
+  businessId: "https://www.chocolicia.site/#business",
   email: "chocoliciaartedosdoces@gmail.com",
 
   /** Telefone/WhatsApp */

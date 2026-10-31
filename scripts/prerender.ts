@@ -36,6 +36,7 @@ function readTemplate(): string {
 
 function injectMeta(template: string, meta: RouteMeta, body: string): string {
   const canonical = `<link rel="canonical" href="${meta.canonical}" />`;
+  const hreflang = `<link rel="alternate" hreflang="pt-BR" href="${meta.canonical}" />`;
   const robotsMeta = meta.robots
     ? `\n    <meta name="robots" content="${meta.robots}" />`
     : "";
@@ -43,7 +44,8 @@ function injectMeta(template: string, meta: RouteMeta, body: string): string {
   const headInjection = `
     <title>${meta.title}</title>
     <meta name="description" content="${meta.description}" />
-    ${canonical}${robotsMeta}
+    ${canonical}
+    ${hreflang}${robotsMeta}
     <meta property="og:type" content="website" />
     <meta property="og:url" content="${meta.canonical}" />
     <meta property="og:title" content="${meta.ogTitle}" />

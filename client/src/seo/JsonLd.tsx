@@ -40,8 +40,10 @@ function buildBakerySchema() {
 
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
-     "@type": "Bakery",
+     "@type": ["Bakery", "LocalBusiness"],
+    "@id": SITE.businessId,
     name: SITE.fullName,
+    alternateName: ["Chocolicia", "Chocolícia Arte dos Doces"],
     url: SITE.url,
     email: SITE.email,
     telephone: `+${SITE.whatsappNumber}`,
@@ -51,6 +53,13 @@ function buildBakerySchema() {
     areaServed,
     sameAs: [SITE.instagram, SITE.facebook, SITE.tiktok].filter(Boolean),
     hasMap: SITE.googleBusiness,
+    parentOrganization: { "@id": SITE.organizationId },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: `+${SITE.whatsappNumber}`,
+      contactType: "customer service",
+      availableLanguage: "pt-BR",
+    },
   };
 
   // Campos opcionais
@@ -95,6 +104,28 @@ export function BakerySchema() {
   );
 }
 
+export function OrganizationSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": SITE.organizationId,
+    name: SITE.fullName,
+    alternateName: ["Chocolicia", "Chocolícia Arte dos Doces"],
+    url: SITE.url,
+    logo: `${SITE.url}/images/logo.png`,
+    email: SITE.email,
+    telephone: `+${SITE.whatsappNumber}`,
+    sameAs: [SITE.instagram, SITE.facebook, SITE.tiktok, SITE.googleBusiness].filter(Boolean),
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: `+${SITE.whatsappNumber}`,
+      contactType: "customer service",
+      availableLanguage: "pt-BR",
+    },
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
+}
+
 // ────────────────────────────────────────────────────
 // 2. WebSite (somente na home)
 // ────────────────────────────────────────────────────
@@ -105,6 +136,8 @@ export function WebSiteSchema() {
     "@type": "WebSite",
     name: SITE.fullName,
     url: SITE.url,
+    "@id": `${SITE.url}/#website`,
+    publisher: { "@id": SITE.organizationId },
     inLanguage: "pt-BR",
   };
   return (
@@ -113,6 +146,21 @@ export function WebSiteSchema() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );
+}
+
+export function WebPageSchema({ name, description, url }: { name: string; description: string; url: string }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    about: { "@id": SITE.organizationId },
+    inLanguage: "pt-BR",
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
 // ────────────────────────────────────────────────────
@@ -234,6 +282,14 @@ export function PageMeta({ meta }: { meta: RouteMeta }) {
       document.head.appendChild(link);
     }
     link.href = meta.canonical;
+    let alternate = document.querySelector<HTMLLinkElement>("link[rel='alternate'][hreflang='pt-BR']");
+    if (!alternate) {
+      alternate = document.createElement("link");
+      alternate.rel = "alternate";
+      alternate.hreflang = "pt-BR";
+      document.head.appendChild(alternate);
+    }
+    alternate.href = meta.canonical;
     // Description
     let desc = document.querySelector<HTMLMetaElement>("meta[name='description']");
     if (desc) desc.content = meta.description;

@@ -14,6 +14,9 @@ import DocesParaFestas from "./pages/DocesParaFestas";
 import Home from "./pages/Home";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
+import Sobre from "./pages/Sobre";
+import FAQ from "./pages/FAQ";
+import { OrganizationSchema } from "./seo/JsonLd";
 
 function Router() {
   return (
@@ -23,6 +26,8 @@ function Router() {
       <Route path="/bolos-personalizados" component={BolosPersonalizados} />
       <Route path="/doces-para-festas" component={DocesParaFestas} />
       <Route path="/areas-atendidas" component={AreasAtendidas} />
+      <Route path="/sobre" component={Sobre} />
+      <Route path="/faq" component={FAQ} />
       <Route path="/politicas-e-termos" component={Legal} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
@@ -45,6 +50,7 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
+          <OrganizationSchema />
           <AnalyticsNavigation />
           <Router />
           <ConsentBanner />

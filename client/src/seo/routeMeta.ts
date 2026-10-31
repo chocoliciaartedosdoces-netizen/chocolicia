@@ -25,6 +25,8 @@ export const PRERENDER_PATHS = [
   "/bolos-personalizados",
   "/doces-para-festas",
   "/areas-atendidas",
+  "/sobre",
+  "/faq",
   "/politicas-e-termos",
   "/404",
 ] as const;
@@ -36,7 +38,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     path: "/",
      title: "Doces, Bolos e Buffet para Festas em Niterói e Região | Chocolícia",
     description:
-      "Chocolícia oferece doces artesanais, bolos personalizados e buffet para festas e eventos em Niterói, São Gonçalo, Maricá e Itaboraí. Peça seu orçamento pelo WhatsApp.",
+      "Doces artesanais, bolos personalizados e buffet em Niterói, São Gonçalo, Maricá e Itaboraí. Peça seu orçamento à Chocolícia.",
     canonical: `${base}/`,
      ogTitle: "Doces, Bolos e Buffet para Festas em Niterói e Região | Chocolícia",
     ogDescription:
@@ -81,6 +83,22 @@ export const routeMeta: Record<string, RouteMeta> = {
      ogTitle: "Áreas Atendidas – Niterói, São Gonçalo, Maricá e Itaboraí | Chocolícia",
     ogDescription:
       "Atendemos Niterói, São Gonçalo, Maricá, Itaboraí e todo o estado do Rio de Janeiro com doces artesanais e buffet para festas.",
+  },
+  "/sobre": {
+    path: "/sobre",
+    title: "Sobre a Chocolícia: Doces Artesanais em Niterói",
+    description: "Conheça a Chocolícia, empresa de doces artesanais e buffet em Niterói, feita à mão com qualidade e atenção aos detalhes.",
+    canonical: `${base}/sobre`,
+    ogTitle: "Sobre a Chocolícia | Doces Artesanais em Niterói",
+    ogDescription: "A Chocolícia cria doces, bolos e buffets artesanais para celebrações no Rio de Janeiro.",
+  },
+  "/faq": {
+    path: "/faq",
+    title: "Perguntas Frequentes sobre Festas | Chocolícia",
+    description: "Respostas sobre encomendas, buffet, doces, bolos, atendimento e regiões atendidas pela Chocolícia.",
+    canonical: `${base}/faq`,
+    ogTitle: "Perguntas Frequentes | Chocolícia",
+    ogDescription: "Veja como pedir orçamento e organizar sua encomenda de doces, bolos ou buffet.",
   },
   "/politicas-e-termos": {
     path: "/politicas-e-termos",
