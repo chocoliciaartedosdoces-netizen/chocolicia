@@ -1,8 +1,7 @@
 /**
  * Configuração central do site – Chocolícia
- * Todos os dados de negócio ficam aqui. Campos marcados com TODO_
- * são opcionais no JSON-LD; o código os omite automaticamente
- * se o valor começar com "TODO_" ou for vazio.
+ * Todos os dados de negócio ficam aqui. Campos opcionais só entram no JSON-LD
+ * quando existem dados confirmados.
  */
 
 export const SITE = {

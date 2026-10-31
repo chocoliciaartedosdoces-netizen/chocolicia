@@ -1,6 +1,6 @@
 /**
  * Gera client/public/images/og-image.jpg (1200×630) a partir de foto real + logo.
- * TODO: substituir por arte final de social quando disponível.
+ * A arte atual é o fallback oficial usado no compartilhamento social.
  */
 
 import fs from "node:fs";
