@@ -13,6 +13,18 @@ export function generateRobotsTxt(): string {
   return `User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -78,6 +90,14 @@ export function generateLlmsTxt(): string {
 - [Bolos Personalizados](${SITE.url}/bolos-personalizados) – Informações sobre bolos personalizados.
 - [Doces para Festas](${SITE.url}/doces-para-festas) – Informações sobre doces artesanais para festas.
 - [Áreas Atendidas](${SITE.url}/areas-atendidas) – Base em Niterói e cidades atendidas no estado do Rio de Janeiro.
+- [Sobre a Chocolícia](${SITE.url}/sobre) – História, diferenciais e forma de trabalho artesanal.
+- [Perguntas frequentes](${SITE.url}/faq) – Respostas objetivas sobre encomendas, festas e atendimento.
+
+## Versões em Markdown
+
+- [Sobre](${SITE.url}/sobre.md)
+- [Serviços](${SITE.url}/servicos.md)
+- [FAQ](${SITE.url}/faq.md)
 
 ## Atendimento e orçamento
 
@@ -206,6 +226,53 @@ WhatsApp: ${SITE.whatsappDisplay} — https://wa.me/${SITE.whatsappNumber}
 Sede em Niterói; atendimento em São Gonçalo, Maricá, Itaboraí e demais cidades do RJ sob consulta.
 
 WhatsApp: ${SITE.whatsappDisplay} — https://wa.me/${SITE.whatsappNumber}
+`,
+    },
+    {
+      filename: "sobre.md",
+      content: `# Sobre a Chocolícia – Doces Artesanais em Niterói
+
+A Chocolícia é uma empresa de doces artesanais e buffet com base em Niterói, RJ. O trabalho valoriza qualidade, produção manual e atenção aos detalhes.
+
+A empresa atende Niterói, São Gonçalo, Maricá, Itaboraí e outras cidades do estado do Rio de Janeiro conforme o serviço e a disponibilidade.
+
+Para pedir orçamento, envie data, cidade, tipo de evento e serviço desejado pelo WhatsApp ${SITE.whatsappDisplay}: https://wa.me/${SITE.whatsappNumber}
+`,
+    },
+    {
+      filename: "servicos.md",
+      content: `# Serviços da Chocolícia
+
+## Doces artesanais
+
+Brigadeiros, doces finos e opções artesanais para festas e presentes.
+
+## Bolos personalizados
+
+Bolos feitos sob encomenda, com tema, cores e acabamento alinhados à ocasião.
+
+## Buffet para festas
+
+Planejamento de doces, cardápio e montagem para celebrações, conforme o evento e a disponibilidade.
+
+Consulte a Chocolícia pelo WhatsApp ${SITE.whatsappDisplay}: https://wa.me/${SITE.whatsappNumber}
+`,
+    },
+    {
+      filename: "faq.md",
+      content: `# Perguntas frequentes sobre a Chocolícia
+
+## Como pedir orçamento?
+
+Envie data, cidade, tipo de evento, convidados e serviço desejado pelo WhatsApp.
+
+## Onde atende?
+
+Niterói, São Gonçalo, Maricá, Itaboraí e outras cidades do RJ conforme disponibilidade.
+
+## Há panetone artesanal?
+
+A disponibilidade é sazonal. Consulte as opções para o período desejado.
 `,
     },
   ];
