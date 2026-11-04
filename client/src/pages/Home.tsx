@@ -315,6 +315,8 @@ export default function Home() {
     ["FAQ", "#faq"],
     ["Orçamento", "#orcamento"],
     ["Contato", "#contato"],
+    ["Receitas", "/receitas"],
+    ["Promoções", "/promocoes"],
   ];
 
   return (
@@ -330,7 +332,7 @@ export default function Home() {
             <span className="font-display text-2xl font-semibold">Chocolícia</span>
           </a>
           <nav className="hidden items-center gap-7 lg:flex">
-            {nav.map(([label, href]) => <a key={href} href={href} className="nav-link">{label}</a>)}
+              {nav.map(([label, href]) => <a key={href} href={href.startsWith("#") ? `/#${href.slice(1)}` : href} className="nav-link">{label}</a>)}
           </nav>
           <a href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackAnalytics("whatsapp_click", { placement: "header_desktop" })} className="header-cta button-gold hidden lg:inline-flex">Peça pelo WhatsApp</a>
           <button onClick={() => setMenuOpen(!menuOpen)} className="grid h-11 w-11 place-items-center rounded-full border border-[#5A3428]/15 lg:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen}>
@@ -340,7 +342,7 @@ export default function Home() {
         {menuOpen && (
           <div className="border-t border-[#5A3428]/10 bg-[#FFF9F0] px-4 pb-6 pt-3 md:px-6 lg:hidden">
             <nav className="flex flex-col">
-              {nav.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="border-b border-[#5A3428]/10 py-3.5 font-medium">{label}</a>)}
+              {nav.map(([label, href]) => <a key={href} href={href.startsWith("#") ? `/#${href.slice(1)}` : href} onClick={() => setMenuOpen(false)} className="border-b border-[#5A3428]/10 py-3.5 font-medium">{label}</a>)}
               <a href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackAnalytics("whatsapp_click", { placement: "header_mobile" })} className="button-gold mt-4 justify-center">Peça pelo WhatsApp</a>
             </nav>
           </div>
