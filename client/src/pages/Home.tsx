@@ -557,31 +557,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="site-footer border-t border-[#FFF9F0]/10 bg-[#3A241D] px-4 py-10 pb-28 text-[#FFF9F0]/70 md:px-6 md:py-12 md:pb-28 lg:px-8">
-        <div className="site-footer-inner mx-auto max-w-7xl">
-          <div className="site-footer-brand">
-            <a href="#inicio" className="footer-brand-lockup" aria-label="Chocolícia — início"><img src={logo} alt="" /><span className="font-display text-3xl text-[#FFF9F0]">Chocolícia</span></a>
-            <p>Doces artesanais para celebrar com afeto.</p>
-          </div>
-          <nav className="site-footer-nav" aria-label="Links essenciais">
-            <p className="footer-kicker">Navegação</p>
-            <a href="#inicio">Início</a>
-            <a href="#buffet">Serviços & Buffet</a>
-            <a href="#orcamento">Orçamento</a>
-          </nav>
-          <div className="site-footer-contact">
-            <p className="footer-kicker">Contato</p>
-            <p>Niterói, Rio de Janeiro</p>
-            <a href={`tel:+${SITE.whatsappNumber}`} onClick={() => trackEvent("phone_click", { placement: "home_footer" })}>{SITE.whatsappDisplay}</a>
-            <a href={`mailto:${officialEmail}`}>{officialEmail}</a>
-          </div>
-          <div className="site-footer-social">
-            <p className="footer-kicker">Redes sociais</p>
-            <SocialLinks className="mt-4" placement="footer_social_icons" />
-          </div>
-        </div>
-        <div className="site-footer-bottom mx-auto mt-8 max-w-7xl"><span>© 2026 Chocolícia</span><span>Feito à mão, com carinho.</span><span className="footer-legal-links"><a href="/politicas-e-termos#privacidade">Privacidade</a><a href="/politicas-e-termos#termos">Termos de Uso</a></span></div>
-      </footer>
+      <SiteFooter variant="home" />
 
       <Dock items={[
         { icon: <House size={18} />, label: "Início", onClick: () => document.getElementById("inicio")?.scrollIntoView({ behavior: "smooth" }) },
