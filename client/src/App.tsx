@@ -10,6 +10,9 @@ import DocesParaFestas from "./pages/DocesParaFestas";
 import Home from "./pages/Home";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
+import Receitas from "./pages/Receitas";
+import ReceitaDetalhe from "./pages/ReceitaDetalhe";
+import Promocoes from "./pages/Promocoes";
 
 function Router() {
   return (
@@ -20,6 +23,9 @@ function Router() {
       <Route path="/doces-para-festas" component={DocesParaFestas} />
       <Route path="/areas-atendidas" component={AreasAtendidas} />
       <Route path="/politicas-e-termos" component={Legal} />
+      <Route path="/receitas" component={Receitas} />
+      <Route path="/receitas/:slug" component={ReceitaDetalhe} />
+      <Route path="/promocoes" component={Promocoes} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

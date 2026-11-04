@@ -1,7 +1,7 @@
-import { eq } from "drizzle-orm";
+import { and, desc, eq, gte, isNull, lte, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres, { type Options } from "postgres";
-import { InsertOrder, InsertUser, Order, orders, s3Files, users } from "../drizzle/schema";
+import { InsertOrder, InsertUser, Order, orders, promocoes, receitas, s3Files, users } from "../drizzle/schema";
 import { ENV } from "./_core/env";
 
 let _sql: ReturnType<typeof postgres> | null = null;
@@ -96,4 +96,40 @@ export async function listS3Files() {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   return db.select().from(s3Files).orderBy(s3Files.createdAt);
+}
+
+export async function listRecentRecipes(limit: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(receitas).where(eq(receitas.status, "publicado")).orderBy(desc(receitas.publicadoEm), desc(receitas.criadoEm)).limit(limit);
+}
+
+export async function listRecipes(page: number, pageSize: number) {
+  const db = await getDb();
+  if (!db) return { items: [], total: 0 };
+  const where = eq(receitas.status, "publicado");
+  const [items, count] = await Promise.all([
+    db.select().from(receitas).where(where).orderBy(desc(receitas.publicadoEm), desc(receitas.criadoEm)).limit(pageSize).offset((page - 1) * pageSize),
+    db.select({ count: sql<number>`count(*)` }).from(receitas).where(where),
+  ]);
+  return { items, total: Number(count[0]?.count ?? 0) };
+}
+
+export async function getRecipeBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  return (await db.select().from(receitas).where(and(eq(receitas.slug, slug), eq(receitas.status, "publicado"))).limit(1))[0];
+}
+
+export async function getActivePromotion() {
+  const db = await getDb();
+  if (!db) return undefined;
+  const now = new Date();
+  return (await db.select().from(promocoes).where(and(eq(promocoes.ativa, true), or(isNull(promocoes.dataInicio), lte(promocoes.dataInicio, now)), or(isNull(promocoes.dataFim), gte(promocoes.dataFim, now)))).orderBy(desc(promocoes.criadoEm)).limit(1))[0];
+}
+
+export async function getPromotionBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  return (await db.select().from(promocoes).where(and(eq(promocoes.slug, slug), eq(promocoes.ativa, true))).limit(1))[0];
 }

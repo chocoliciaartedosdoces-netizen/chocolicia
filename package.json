@@ -16,7 +16,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "pnpm db:generate && pnpm db:migrate",
-    "db:smoke": "tsx scripts/db-smoke.mts"
+    "db:smoke": "tsx scripts/db-smoke.mts",
+    "seed:receitas": "tsx scripts/seed-receitas.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

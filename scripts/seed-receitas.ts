@@ -1,0 +1,13 @@
+import { getDb } from "../server/db";
+import { promocoes, receitas } from "../drizzle/schema";
+
+const db = await getDb();
+if (!db) throw new Error("DATABASE_URL/NEON_DATABASE_URL não configurada");
+const agora = new Date();
+await db.insert(receitas).values([
+  { titulo: "Brigadeiro gourmet de chocolate", slug: "brigadeiro-gourmet-de-chocolate", resumo: "Uma receita cremosa e fácil para adoçar qualquer comemoração.", ingredientes: ["1 lata de leite condensado", "1 colher de sopa de manteiga", "4 colheres de sopa de chocolate em pó", "Granulado para finalizar"], modoPreparo: ["Misture o leite condensado, a manteiga e o chocolate em uma panela.", "Cozinhe em fogo baixo, mexendo até desgrudar do fundo.", "Deixe esfriar, enrole e passe no granulado."], tempoPreparo: "40 minutos", rendimento: "20 unidades", imagemUrl: "/images/brigadeiros.webp", imagemAlt: "Brigadeiros artesanais de chocolate", status: "publicado", publicadoEm: agora },
+  { titulo: "Bolo de aniversário fofinho", slug: "bolo-de-aniversario-fofinho", resumo: "Massa leve e versátil para celebrar com afeto.", ingredientes: ["3 ovos", "2 xícaras de farinha de trigo", "1 xícara de açúcar", "1 xícara de leite", "1 colher de sopa de fermento"], modoPreparo: ["Bata os ovos com o açúcar até formar um creme claro.", "Acrescente a farinha e o leite alternadamente.", "Incorpore o fermento e asse em forno preaquecido a 180 °C por cerca de 35 minutos."], tempoPreparo: "1 hora", rendimento: "12 porções", imagemUrl: "/images/bolo-aniversario.webp", imagemAlt: "Bolo artesanal de aniversário", status: "publicado", publicadoEm: agora },
+  { titulo: "Cupcakes de baunilha", slug: "cupcakes-de-baunilha", resumo: "Cupcakes delicados para festas e mesas de doces.", ingredientes: ["2 ovos", "1 e 1/2 xícara de farinha", "1 xícara de açúcar", "1/2 xícara de leite", "1 colher de chá de baunilha"], modoPreparo: ["Misture os ingredientes líquidos.", "Junte os secos e mexa apenas até incorporar.", "Distribua em forminhas e asse a 180 °C por 20 minutos."], tempoPreparo: "35 minutos", rendimento: "12 cupcakes", imagemUrl: "/images/cupcakes-rosas.webp", imagemAlt: "Cupcakes decorados", status: "publicado", publicadoEm: agora },
+]).onConflictDoNothing();
+await db.insert(promocoes).values({ titulo: "Especial de Natal", slug: "especial-de-natal", subtitulo: "Encomendas doces para celebrar", bannerUrl: "/images/mesa-personalizada.webp", conteudo: "Deixe sua ceia ainda mais especial com doces e bolos feitos com carinho pela Chocolícia.", chamadaBotao: "Falar no WhatsApp", linkBotao: "https://wa.me/5521977359379?text=Olá%2C%20Chocolícia!%20Quero%20saber%20mais%20sobre%20o%20Especial%20de%20Natal.", ativa: true }).onConflictDoNothing();
+console.log("Seed de receitas e promoção concluído.");

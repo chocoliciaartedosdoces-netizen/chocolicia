@@ -1,0 +1,7 @@
+import { ReactNode } from "react";
+import { MessageCircle } from "lucide-react";
+import { SITE, WA_ORCAMENTO } from "@/config/site";
+
+export default function ContentLayout({ children, title }: { children: ReactNode; title: string }) {
+  return <div className="min-h-screen bg-[#FFF9F0] text-[#5A3428]"><header className="border-b border-[#5A3428]/10 bg-[#FFF9F0] px-4 py-5"><div className="mx-auto flex max-w-6xl items-center justify-between"><a href="/" className="font-display text-3xl">Chocolícia</a><nav className="hidden gap-6 text-sm md:flex"><a href="/">Início</a><a href="/receitas" className={title === "Receitas" ? "font-semibold text-[#B4772A]" : ""}>Receitas</a><a href="/promocoes" className={title === "Promoções" ? "font-semibold text-[#B4772A]" : ""}>Promoções</a><a href="/#orcamento">Orçamento</a><a href="/#contato">Contato</a></nav><a href={WA_ORCAMENTO} target="_blank" rel="noreferrer" className="button-gold hidden sm:inline-flex">Fale conosco</a></div></header><main>{children}</main><footer className="mt-16 bg-[#3A241D] px-4 py-10 text-center text-sm text-[#FFF9F0]/70"><p>{SITE.fullName} · {SITE.city}, {SITE.state}</p><nav className="mt-4 flex justify-center gap-5"><a href="/">Início</a><a href="/receitas">Receitas</a><a href="/promocoes">Promoções</a><a href="/politicas-e-termos">Privacidade</a></nav></footer><a href={WA_ORCAMENTO} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp" className="fixed bottom-5 right-5 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-xl"><MessageCircle /></a></div>;
+}

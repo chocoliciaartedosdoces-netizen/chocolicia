@@ -26,6 +26,8 @@ export const PRERENDER_PATHS = [
   "/doces-para-festas",
   "/areas-atendidas",
   "/politicas-e-termos",
+  "/receitas",
+  "/promocoes",
   "/404",
 ] as const;
 
@@ -92,6 +94,22 @@ export const routeMeta: Record<string, RouteMeta> = {
     ogDescription: "Política de privacidade e termos de uso da Chocolícia.",
     robots: "noindex,follow",
     inSitemap: false,
+  },
+  "/receitas": {
+    path: "/receitas",
+    title: "Receitas Doces para Fazer em Casa | Chocolícia",
+    description: "Receitas de doces, bolos e sobremesas da Chocolícia para preparar em casa e celebrar momentos especiais.",
+    canonical: `${base}/receitas`,
+    ogTitle: "Receitas da Chocolícia",
+    ogDescription: "Receitas doces e fáceis para fazer em casa.",
+  },
+  "/promocoes": {
+    path: "/promocoes",
+    title: "Promoções de Doces e Bolos em Niterói | Chocolícia",
+    description: "Confira as promoções ativas da Chocolícia para doces, bolos e festas em Niterói e região.",
+    canonical: `${base}/promocoes`,
+    ogTitle: "Promoções Chocolícia",
+    ogDescription: "Ofertas especiais de doces e bolos para sua comemoração.",
   },
   "/404": {
     path: "/404",

@@ -289,6 +289,7 @@ function QuoteSection() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string[] | null>(null);
+  const activePromotion = trpc.promocoes.ativa.useQuery();
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => event.key === "Escape" && lightbox && setLightbox(null);
     window.addEventListener("keydown", onKey);
@@ -509,6 +510,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {activePromotion.data && <section className="bg-[#3A241D] px-4 py-5 text-center text-[#FFF9F0]"><a href="/promocoes" className="font-medium">Promoção em destaque: {activePromotion.data.titulo} <span className="ml-2 text-[#F3CD73]">Confira →</span></a></section>}
 
         <section id="buffet" data-reveal className="reveal scroll-mt-20 px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
           <div className="relative mx-auto min-h-[42rem] max-w-7xl overflow-hidden rounded-[2rem] md:min-h-[38rem]">
