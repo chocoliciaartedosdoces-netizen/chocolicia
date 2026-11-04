@@ -44,4 +44,7 @@ export default defineConfig(({ isSsrBuild }) => ({
       deny: ["**/.*"],
     },
   },
+  preview: {
+    host: true,
+  },
 }));

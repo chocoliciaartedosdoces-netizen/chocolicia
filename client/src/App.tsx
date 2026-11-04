@@ -1,28 +1,50 @@
+import { lazy, Suspense, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import LegacyRouteFallback from "./components/LegacyRouteFallback";
+import RecipeRouteFallback from "./components/RecipeRouteFallback";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import AreasAtendidas from "./pages/AreasAtendidas";
-import BolosPersonalizados from "./pages/BolosPersonalizados";
-import BuffetParaFestas from "./pages/BuffetParaFestas";
-import DocesParaFestas from "./pages/DocesParaFestas";
 import Home from "./pages/Home";
-import Legal from "./pages/Legal";
-import NotFound from "./pages/NotFound";
+
+const AreasAtendidas = lazy(() => import("./pages/AreasAtendidas"));
+const BolosPersonalizados = lazy(() => import("./pages/BolosPersonalizados"));
+const BuffetParaFestas = lazy(() => import("./pages/BuffetParaFestas"));
+const DocesParaFestas = lazy(() => import("./pages/DocesParaFestas"));
+const Legal = lazy(() => import("./pages/Legal"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Recipes = lazy(() => import("./pages/Recipes"));
+const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
+const Promotion = lazy(() => import("./pages/Promotion"));
+
+function LazyRoute({ children }: { children: ReactNode }) {
+  return <Suspense fallback={<LegacyRouteFallback />}>{children}</Suspense>;
+}
+
+function RecipeListRoute() {
+  return <Suspense fallback={<RecipeRouteFallback />}><Recipes /></Suspense>;
+}
+
+function RecipeDetailRoute() {
+  return <Suspense fallback={<RecipeRouteFallback detail />}><RecipeDetail /></Suspense>;
+}
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/buffet-para-festas" component={BuffetParaFestas} />
-      <Route path="/bolos-personalizados" component={BolosPersonalizados} />
-      <Route path="/doces-para-festas" component={DocesParaFestas} />
-      <Route path="/areas-atendidas" component={AreasAtendidas} />
-      <Route path="/politicas-e-termos" component={Legal} />
-      <Route path="/404" component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
+      <Route path="/buffet-para-festas"><LazyRoute><BuffetParaFestas /></LazyRoute></Route>
+      <Route path="/bolos-personalizados"><LazyRoute><BolosPersonalizados /></LazyRoute></Route>
+      <Route path="/doces-para-festas"><LazyRoute><DocesParaFestas /></LazyRoute></Route>
+      <Route path="/areas-atendidas"><LazyRoute><AreasAtendidas /></LazyRoute></Route>
+      <Route path="/politicas-e-termos"><LazyRoute><Legal /></LazyRoute></Route>
+      <Route path="/receitas" component={RecipeListRoute} />
+      <Route path="/promocao"><LazyRoute><Promotion /></LazyRoute></Route>
+      <Route path="/promocoes"><LazyRoute><Promotion /></LazyRoute></Route>
+      <Route path="/receitas/:slug" component={RecipeDetailRoute} />
+      <Route path="/404"><LazyRoute><NotFound /></LazyRoute></Route>
+      <Route><LazyRoute><NotFound /></LazyRoute></Route>
     </Switch>
   );
 }
