@@ -1,7 +1,0 @@
-import ContentLayout from "@/components/ContentLayout";
-import { trpc } from "@/lib/trpc";
-import { PageMeta } from "@/seo/JsonLd";
-import { getRouteMeta } from "@/seo/routeMeta";
-import { WA_ORCAMENTO } from "@/config/site";
-
-export default function Promocoes() { const { data: promo, isLoading } = trpc.promocoes.ativa.useQuery(); return <ContentLayout title="Promoções"><PageMeta meta={getRouteMeta("/promocoes")} /><section className="mx-auto max-w-5xl px-4 py-14">{isLoading ? <p>Carregando promoção…</p> : promo ? <article className="overflow-hidden rounded-3xl bg-white shadow-sm">{promo.bannerUrl && <img src={promo.bannerUrl} alt={promo.titulo} className="h-72 w-full object-cover" />}<div className="p-8"><p className="eyebrow">Oferta especial</p><h1 className="section-title mt-3">{promo.titulo}</h1>{promo.subtitulo && <p className="mt-3 text-xl text-[#8A5A44]">{promo.subtitulo}</p>}<p className="mt-6 max-w-3xl whitespace-pre-line text-lg leading-8 text-[#5A3428]">{promo.conteudo}</p>{promo.linkBotao && <a href={promo.linkBotao} target="_blank" rel="noreferrer" className="button-gold mt-7 inline-flex">{promo.chamadaBotao || "Saiba mais"}</a>}</div></article> : <div className="rounded-3xl bg-[#F3E5D0] p-8 text-center"><h1 className="font-display text-4xl">Nenhuma promoção ativa no momento</h1><p className="mt-4">Mas podemos criar algo delicioso para sua próxima comemoração.</p><a href={WA_ORCAMENTO} target="_blank" rel="noreferrer" className="button-gold mt-6 inline-flex">Falar no WhatsApp</a></div>}</section></ContentLayout>; }

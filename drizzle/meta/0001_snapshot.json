@@ -1,5 +1,5 @@
 {
-  "id": "d5cf1292-1d96-42c2-98c1-2bde8ab5c5b7",
+  "id": "a7880363-6d62-4bfc-b1bd-a97f933fce70",
   "prevId": "45bdb7b1-9cdb-4b4b-9bae-1cf93ba5e789",
   "version": "7",
   "dialect": "postgresql",
@@ -73,182 +73,170 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.promocoes": {
-      "name": "promocoes",
+    "public.recipes": {
+      "name": "recipes",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
-        },
-        "titulo": {
-          "name": "titulo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "slug": {
           "name": "slug",
+          "type": "varchar(180)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(180)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "excerpt": {
+          "name": "excerpt",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category": {
+          "name": "category",
+          "type": "varchar(80)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tags": {
+          "name": "tags",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'"
+        },
+        "cover_image_url": {
+          "name": "cover_image_url",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "subtitulo": {
-          "name": "subtitulo",
-          "type": "text",
+        "cover_image_alt": {
+          "name": "cover_image_alt",
+          "type": "varchar(240)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
-        "banner_url": {
-          "name": "banner_url",
+        "image_prompt": {
+          "name": "image_prompt",
           "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "conteudo": {
-          "name": "conteudo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "chamada_botao": {
-          "name": "chamada_botao",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "link_botao": {
-          "name": "link_botao",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ativa": {
-          "name": "ativa",
-          "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": "''"
         },
-        "data_inicio": {
-          "name": "data_inicio",
+        "cover_image_variants": {
+          "name": "cover_image_variants",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "ingredients": {
+          "name": "ingredients",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "steps": {
+          "name": "steps",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "tips": {
+          "name": "tips",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "storage_notes": {
+          "name": "storage_notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "faq": {
+          "name": "faq",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "prep_time_min": {
+          "name": "prep_time_min",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cook_time_min": {
+          "name": "cook_time_min",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "servings": {
+          "name": "servings",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "difficulty": {
+          "name": "difficulty",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "recipe_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'draft'"
+        },
+        "published_at": {
+          "name": "published_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         },
-        "data_fim": {
-          "name": "data_fim",
-          "type": "timestamp with time zone",
+        "ai_model": {
+          "name": "ai_model",
+          "type": "varchar(120)",
           "primaryKey": false,
           "notNull": false
         },
-        "criado_em": {
-          "name": "criado_em",
+        "generation_meta": {
+          "name": "generation_meta",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "promocoes_slug_unique": {
-          "name": "promocoes_slug_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.receitas": {
-      "name": "receitas",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
         },
-        "titulo": {
-          "name": "titulo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "slug": {
-          "name": "slug",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "resumo": {
-          "name": "resumo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ingredientes": {
-          "name": "ingredientes",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'[]'::jsonb"
-        },
-        "modo_preparo": {
-          "name": "modo_preparo",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'[]'::jsonb"
-        },
-        "tempo_preparo": {
-          "name": "tempo_preparo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "rendimento": {
-          "name": "rendimento",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "imagem_url": {
-          "name": "imagem_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "imagem_alt": {
-          "name": "imagem_alt",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "status": {
-          "name": "status",
-          "type": "varchar(16)",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'rascunho'"
-        },
-        "publicado_em": {
-          "name": "publicado_em",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "criado_em": {
-          "name": "criado_em",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -256,8 +244,23 @@
         }
       },
       "indexes": {
-        "receitas_status_publicado_em_idx": {
-          "name": "receitas_status_publicado_em_idx",
+        "recipes_slug_uidx": {
+          "name": "recipes_slug_uidx",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "recipes_status_published_at_idx": {
+          "name": "recipes_status_published_at_idx",
           "columns": [
             {
               "expression": "status",
@@ -266,7 +269,22 @@
               "nulls": "last"
             },
             {
-              "expression": "publicado_em",
+              "expression": "published_at",
+              "isExpression": false,
+              "asc": false,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "recipes_category_idx": {
+          "name": "recipes_category_idx",
+          "columns": [
+            {
+              "expression": "category",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -280,15 +298,7 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "receitas_slug_unique": {
-          "name": "receitas_slug_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
-        }
-      },
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -439,6 +449,15 @@
     }
   },
   "enums": {
+    "public.recipe_status": {
+      "name": "recipe_status",
+      "schema": "public",
+      "values": [
+        "draft",
+        "published",
+        "failed"
+      ]
+    },
     "public.user_role": {
       "name": "user_role",
       "schema": "public",

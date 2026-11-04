@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { adminProcedure, publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { createOrder, createS3File, getActivePromotion, getPromotionBySlug, getRecipeBySlug, listRecentRecipes, listRecipes, listS3Files } from "./db";
+import { createOrder, createS3File, listS3Files } from "./db";
 import { storageGetSignedUrl, storagePut } from "./storage";
 
 export const appRouter = router({
@@ -29,21 +29,6 @@ export const appRouter = router({
       category: z.string().trim().min(2).max(120),
       details: z.string().max(4000).optional(),
     })).mutation(({ input }) => createOrder({ ...input, desiredDate: input.desiredDate || null, details: input.details || null })),
-  }),
-
-  receitas: router({
-    recentes: publicProcedure.input(z.object({ limite: z.number().int().min(1).max(10).default(2) }).optional()).query(({ input }) => listRecentRecipes(input?.limite ?? 2)),
-    listar: publicProcedure.input(z.object({ pagina: z.number().int().min(1).default(1), porPagina: z.number().int().min(1).max(24).default(9) }).optional()).query(({ input }) => listRecipes(input?.pagina ?? 1, input?.porPagina ?? 9)),
-    porSlug: publicProcedure.input(z.object({ slug: z.string().min(1) })).query(async ({ input }) => {
-      const result = await getRecipeBySlug(input.slug);
-      if (!result) throw new Error("Receita não encontrada");
-      return result;
-    }),
-  }),
-
-  promocoes: router({
-    ativa: publicProcedure.query(() => getActivePromotion()),
-    porSlug: publicProcedure.input(z.object({ slug: z.string().min(1) })).query(({ input }) => getPromotionBySlug(input.slug)),
   }),
 
   catalog: router({

@@ -44,11 +44,10 @@ User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: ${SITE.url}/sitemap.xml
-Sitemap: ${SITE.url}/sitemap-receitas.xml
 `;
 }
 
-export function generatePagesSitemapXml(): string {
+export function generateSitemapXml(): string {
   const today = new Date().toISOString().split("T")[0];
   const routes = getSitemapRoutes();
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -67,34 +66,6 @@ ${routes
 `;
 }
 
-export function generateRecipeSitemapXml(recipes: Array<{ slug: string; publicadoEm: Date | string | null }>): string {
-  const fallbackDate = new Date().toISOString().split("T")[0];
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${recipes
-  .map((recipe) => {
-    const lastmod = recipe.publicadoEm ? new Date(recipe.publicadoEm).toISOString().split("T")[0] : fallbackDate;
-    return `  <url>
-    <loc>${SITE.url}/receitas/${encodeURIComponent(recipe.slug)}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`;
-  })
-  .join("\n")}
-</urlset>
-`;
-}
-
-export function generateSitemapXml(): string {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>${SITE.url}/sitemap-pages.xml</loc></sitemap>
-  <sitemap><loc>${SITE.url}/sitemap-receitas.xml</loc></sitemap>
-</sitemapindex>
-`;
-}
-
 export function generateLlmsTxt(): string {
   return `# ${SITE.fullName}
 
@@ -103,6 +74,7 @@ export function generateLlmsTxt(): string {
 ## Páginas principais
 
 - [Início](${SITE.url}/) – Serviços, contato e formulário de orçamento.
+- [Receitas](${SITE.url}/receitas) – Receitas de bolos, docinhos, sobremesas e chocolates com ingredientes e preparo passo a passo.
 - [Buffet para Festas](${SITE.url}/buffet-para-festas) – Informações sobre buffet para diferentes tipos de eventos.
 - [Bolos Personalizados](${SITE.url}/bolos-personalizados) – Informações sobre bolos personalizados.
 - [Doces para Festas](${SITE.url}/doces-para-festas) – Informações sobre doces artesanais para festas.
