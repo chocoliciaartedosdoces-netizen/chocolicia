@@ -289,6 +289,7 @@ function QuoteSection() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string[] | null>(null);
+  const recentRecipes = trpc.receitas.recentes.useQuery({ limite: 2 });
   const activePromotion = trpc.promocoes.ativa.useQuery();
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => event.key === "Escape" && lightbox && setLightbox(null);
@@ -511,6 +512,7 @@ export default function Home() {
           </div>
         </section>
 
+        {recentRecipes.data && recentRecipes.data.length > 0 && <section data-reveal className="reveal bg-[#F3E5D0]/65 px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20"><div className="mx-auto max-w-7xl"><div className="section-heading"><div><p className="eyebrow mb-3">Feitas para compartilhar</p><h2 className="section-title">Receitas do dia</h2></div><a href="/receitas" className="text-cta">Ver todas as receitas <Icon name="arrow" className="h-4 w-4" /></a></div><div className="mt-8 grid gap-6 md:grid-cols-2">{recentRecipes.data.map((recipe) => <article key={recipe.id} className="overflow-hidden rounded-3xl bg-[#FFF9F0] md:flex"><img src={recipe.imagemUrl || "/images/og-image.jpg"} alt={recipe.imagemAlt || recipe.titulo} className="h-56 w-full object-cover md:h-auto md:w-2/5" /><div className="p-6"><h3 className="font-display text-3xl">{recipe.titulo}</h3><p className="mt-3 text-sm text-[#8A5A44]">{recipe.tempoPreparo || "Tempo não informado"}</p><a href={`/receitas/${recipe.slug}`} className="button-gold mt-5 inline-flex">Ver receita completa</a></div></article>)}</div></div></section>}
         {activePromotion.data && <section className="bg-[#3A241D] px-4 py-5 text-center text-[#FFF9F0]"><a href="/promocoes" className="font-medium">Promoção em destaque: {activePromotion.data.titulo} <span className="ml-2 text-[#F3CD73]">Confira →</span></a></section>}
 
         <section id="buffet" data-reveal className="reveal scroll-mt-20 px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
