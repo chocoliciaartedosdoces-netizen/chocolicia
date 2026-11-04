@@ -2,6 +2,7 @@
  * Pré-renderiza rotas públicas em HTML estático após vite build + SSR bundle.
  */
 
+import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -10,10 +11,13 @@ import {
   generateLlmsFullTxt,
   generateLlmsTxt,
   generatePageMarkdownFiles,
+  generatePagesSitemapXml,
+  generateRecipeSitemapXml,
   generateRobotsTxt,
   generateSitemapXml,
 } from "../client/src/seo/buildArtifacts.ts";
 import { getRouteMeta, PRERENDER_PATHS, type RouteMeta } from "../client/src/seo/routeMeta.ts";
+import { listPublishedRecipeSlugs } from "../server/db.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -103,8 +107,11 @@ async function prerender() {
     }
   }
 
+  const recipeSlugs = await listPublishedRecipeSlugs();
   writeFile(path.join(distPublic, "robots.txt"), generateRobotsTxt());
   writeFile(path.join(distPublic, "sitemap.xml"), generateSitemapXml());
+  writeFile(path.join(distPublic, "sitemap-pages.xml"), generatePagesSitemapXml());
+  writeFile(path.join(distPublic, "sitemap-receitas.xml"), generateRecipeSitemapXml(recipeSlugs));
   writeFile(path.join(distPublic, "llms.txt"), generateLlmsTxt());
   writeFile(path.join(distPublic, "llms-full.txt"), generateLlmsFullTxt());
 

@@ -44,10 +44,11 @@ User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: ${SITE.url}/sitemap.xml
+Sitemap: ${SITE.url}/sitemap-receitas.xml
 `;
 }
 
-export function generateSitemapXml(): string {
+export function generatePagesSitemapXml(): string {
   const today = new Date().toISOString().split("T")[0];
   const routes = getSitemapRoutes();
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -63,6 +64,34 @@ ${routes
   )
   .join("\n")}
 </urlset>
+`;
+}
+
+export function generateRecipeSitemapXml(recipes: Array<{ slug: string; publicadoEm: Date | string | null }>): string {
+  const fallbackDate = new Date().toISOString().split("T")[0];
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${recipes
+  .map((recipe) => {
+    const lastmod = recipe.publicadoEm ? new Date(recipe.publicadoEm).toISOString().split("T")[0] : fallbackDate;
+    return `  <url>
+    <loc>${SITE.url}/receitas/${encodeURIComponent(recipe.slug)}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+  })
+  .join("\n")}
+</urlset>
+`;
+}
+
+export function generateSitemapXml(): string {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>${SITE.url}/sitemap-pages.xml</loc></sitemap>
+  <sitemap><loc>${SITE.url}/sitemap-receitas.xml</loc></sitemap>
+</sitemapindex>
 `;
 }
 

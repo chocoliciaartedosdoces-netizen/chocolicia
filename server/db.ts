@@ -104,6 +104,12 @@ export async function listRecentRecipes(limit: number) {
   return db.select().from(receitas).where(eq(receitas.status, "publicado")).orderBy(desc(receitas.publicadoEm), desc(receitas.criadoEm)).limit(limit);
 }
 
+export async function listPublishedRecipeSlugs() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select({ slug: receitas.slug, publicadoEm: receitas.publicadoEm }).from(receitas).where(eq(receitas.status, "publicado")).orderBy(desc(receitas.publicadoEm), desc(receitas.criadoEm));
+}
+
 export async function listRecipes(page: number, pageSize: number) {
   const db = await getDb();
   if (!db) return { items: [], total: 0 };
